@@ -6,14 +6,13 @@ import Navbar from './Components/Navbar'
 import TopMenu from './Components/TopMenu'
 
 function App() {
-
   return (
     <>
       <Navbar />
       <TopMenu />
-      <AdsBanner />
+      {/* <AdsBanner />
       <MovieGrid />
-      <AdsBanner />
+      <AdsBanner /> */}
     </>
   )
 }

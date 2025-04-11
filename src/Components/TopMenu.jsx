@@ -10,7 +10,6 @@ const TopMenu = () => {
             const scrollAmount = direction === "left" ? -300 : 300;
             current.scrollBy({ left: scrollAmount, behavior: "smooth" });
 
-            // Optional: Check position to simulate infinite by rearranging elements
             setTimeout(() => {
                 const children = Array.from(current.children);
                 if (direction === "right") {
@@ -26,6 +25,9 @@ const TopMenu = () => {
         }
     };
 
+    setInterval(() => {
+        scroll("right");
+    }, 100000);
 
     const CarousalMovie = async () => {
         const res = await fetch('/api');
@@ -34,7 +36,7 @@ const TopMenu = () => {
 
         const parser = new DOMParser()
         const doc = parser.parseFromString(html, 'text/html')
-        const movieElements = doc.querySelector('.owl-carousel ').querySelectorAll('a');
+        const movieElements = doc.querySelector('.owl-carousel').querySelectorAll('a');
 
         const CarousalArray = [];
         movieElements.forEach((el) => {
@@ -50,10 +52,9 @@ const TopMenu = () => {
         CarousalMovie();
     }, [movies])
 
-
     return (
         <div>
-            <div className="relative w-full overflow-hidden">
+            <div className="relative w-full overflow-hidden ">
                 <button
                     onClick={() => scroll("left")}
                     className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 p-2 rounded-full shadow"
@@ -61,33 +62,18 @@ const TopMenu = () => {
                     left
                 </button>
 
-                <div
-                    ref={carouselRef}
-                    className="flex overflow-x-scroll no-scrollbar scroll-smooth space-x-4"
-                >
+                <div ref={carouselRef} className="flex no-scrollbar scroll-smooth space-x-4 ">
                     {[...movies, ...movies].map((movie, index) => (
-                        <div
-                            key={`${movie.id}-${index}`}
-                            className="min-w-[200px] flex-shrink-0 bg-white rounded-xl shadow p-4"
-                        >
-                            <img
-                                src={movie.image}
-                                alt={movie.title}
-                                className="rounded-md mb-2 w-full h-40 object-cover"
-                            />
+                        <a href={`${movie.link}`} key={`${movie.id}-${index}`} className="flex-shrink-0 rounded-xl shadow w-25 h-40 py-2 mx-2">
+                            <img src={movie.image} alt={movie.title} className="rounded-md mb-2 w-fit h-fit border   object-cover mx-auto" />
                             <h3 className="text-lg font-semibold">{movie.title}</h3>
-                        </div>
+                        </a>
                     ))}
                 </div>
 
-                <button
-                    onClick={() => scroll("right")}
-                    className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 p-2 rounded-full shadow"
-                >
-                    right
+                <button onClick={() => scroll("right")} className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 p-2 rounded-full shadow"> right
                 </button>
             </div>
-
         </div>
     )
 }
