@@ -30,22 +30,23 @@ const TopMenu = () => {
     }, 100000);
 
     const CarousalMovie = async () => {
-        const res = await fetch('/api');
+        const corsProxy = 'https://api.allorigins.win/get?url=';
+        const originalUrl = 'https://sdmoviespoint.voto/';
+        const url = corsProxy + encodeURIComponent(originalUrl);
+        const response = await fetch(url);
+        const proxyData = await response.json();
 
-        const html = await res?.text();
-
-        const parser = new DOMParser()
-        const doc = parser?.parseFromString(html, 'text/html')
-        const movieElements = doc?.querySelector('.owl-carousel')?.querySelectorAll('a');
-
-        const CarousalArray = [];
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(proxyData.contents, 'text/html');
+        const movieElements = doc.querySelector('.owl-carousel')?.querySelectorAll('a');
+        const movieArray = [];
         movieElements?.forEach((el) => {
-            CarousalArray?.push({
+            movieArray?.push({
                 link: el?.href,
                 image: el?.querySelector('img')?.getAttribute('data-src'),
             })
         })
-        setMovies(CarousalArray);
+        setMovies(movieArray);
     }
 
     useEffect(() => {
