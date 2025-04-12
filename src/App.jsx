@@ -10,9 +10,9 @@ function App() {
     <>
       <Navbar />
       <TopMenu />
-      {/* <AdsBanner />
+      <AdsBanner />
       <MovieGrid />
-      <AdsBanner /> */}
+      <AdsBanner />
     </>
   )
 }
