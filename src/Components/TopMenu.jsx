@@ -25,10 +25,6 @@ const TopMenu = () => {
         }
     };
 
-    setInterval(() => {
-        scroll("right");
-    }, 100000);
-
     const CarousalMovie = async () => {
         const corsProxy = 'https://api.allorigins.win/get?url=';
         const originalUrl = 'https://sdmoviespoint.voto/';

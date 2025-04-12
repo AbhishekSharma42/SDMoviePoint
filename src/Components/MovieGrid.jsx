@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // import MovieCard from './MovieCard';
 
 const MovieGrid = () => {
-
-    // const [loading, setLoading] = React.useState(true)
+    const [movies, setMovies] = useState([]);
+    const Movies = [];
 
     const GeMovie = async () => {
 
@@ -12,24 +12,39 @@ const MovieGrid = () => {
         const url = corsProxy + encodeURIComponent(originalUrl);
         const response = await fetch(url);
 
-        const proxyData = await response.json();
+        const proxyData = await response?.json();
         const parser = new DOMParser();
-        const doc = parser.parseFromString(proxyData.contents, 'text/html');
-        // const movieElements = doc.querySelector('.content .primary .post-box')?.querySelectorAll('a');
-        console.log(doc);
+        const doc = parser?.parseFromString(proxyData.contents, 'text/html');
+        const movieElements = doc?.querySelector('main')?.querySelectorAll('.post-box-media a');
 
+        movieElements?.forEach((movieElements) => {
+            const movie = {
+                image: movieElements.querySelector('img')?.src,
+                link: movieElements.href,
+                title: movieElements.querySelector('h2')?.textContent,
+            }
+            Movies.push(movie);
+        })
+        setMovies(Movies);
     }
 
-    GeMovie();
+    useEffect(() => {
+        GeMovie();
+    }, [])
 
     return (
         <div>
-            <div className="grid grid-cols-7 gap-2 justify-items-center">
-                <div className="flex flex-col justify-center items-center w-1/4 h-80 bg-gray-200 rounded-lg shadow-md p-4">
-                    <img src="https://via.placeholder.com/150" alt="Movie Poster" className="w-full h-3/4 object-cover rounded-lg mb-2" />
-                    <h2 className="text-lg font-bold">Movie Title</h2>
-                    <p className="text-sm text-gray-600">Movie Description</p>
-                </div>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-7 gap-2 justify-items-center">
+                {
+                    movies.map((item) => {
+                        return (
+                            <a href={item.link} key={item.link} className="flex flex-col justify-center items-center  bg-gray-200 rounded-lg shadow-md">
+                                <img src={`${item.image}`} alt="Movie Poster" className="w-35 h-50 sm:w-fit sm:h-fit  object-cover rounded-lg " />
+                                <h2 className="text-lg font-bold">{item.title}</h2>
+                            </a>
+                        )
+                    })
+                }
 
             </div>
         </div>
