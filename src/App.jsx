@@ -1,18 +1,30 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import AdsBanner from './Components/AdsBanner'
+import MovieDetail from './Components/MovieDetail'
 import MovieGrid from './Components/MovieGrid'
 import Navbar from './Components/Navbar'
 import TopMenu from './Components/TopMenu'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { MovieContex } from './Utils/Context'
+
 
 function App() {
   return (
     <>
-      <Navbar />
-      <TopMenu />
-      <AdsBanner />
-      <MovieGrid />
-      <AdsBanner />
+      <BrowserRouter>
+        <Navbar />
+        <MovieContex>
+          <TopMenu />
+          <AdsBanner />
+          <Routes >
+            <Route path="/" element={<MovieGrid />} />
+          </Routes>
+          <Routes >
+            <Route path="move-detail" element={<MovieDetail />} />
+          </Routes>
+          <AdsBanner />
+        </MovieContex>
+      </BrowserRouter>
     </>
   )
 }
