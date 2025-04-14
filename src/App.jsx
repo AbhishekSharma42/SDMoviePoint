@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={<MovieGrid />} />
           </Routes>
           <Routes >
-            <Route path="move-detail" element={<MovieDetail />} />
+            <Route path="move-detail/:str" element={<MovieDetail />} />
           </Routes>
           <AdsBanner />
         </MovieContex>

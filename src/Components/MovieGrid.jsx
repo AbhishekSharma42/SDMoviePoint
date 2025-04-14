@@ -1,14 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../Utils/Context';
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-// import MovieCard from './MovieCard';
 
 const MovieGrid = () => {
     const [movies, setMovies] = useState([]);
     const Movies = [];
-
-
-    const { setMovieDetail } = useContext(UserContext);
 
     const GeMovie = async () => {
 
@@ -43,8 +38,7 @@ const MovieGrid = () => {
                 {
                     movies.map((item) => {
                         return (
-
-                            <Link to={`/move-detail/`} onClick={() => setMovieDetail(item.link)} key={item.link} className="flex flex-col justify-center items-center  bg-gray-200 rounded-lg shadow-md">
+                            <Link to={`/move-detail/${item.link.replace('https://sdmoviespoint.voto/', '').replaceAll('/', '')}`} key={item.link} className="flex flex-col justify-center items-center  bg-gray-200 rounded-lg shadow-md">
                                 <img src={`${item.image}`} alt="Movie Poster" className="w-35 h-50 sm:w-fit sm:h-fit  object-cover rounded-lg " />
                                 <h2 className="text-lg font-bold">{item.title}</h2>
                             </Link>

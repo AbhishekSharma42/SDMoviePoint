@@ -5,6 +5,9 @@ const UserContext = createContext();
 const MovieContex = (props) => {
     const [movesDetail, setMovieDetail] = useState([]);
 
+    
+
+
     return (
         <UserContext.Provider value={{ movesDetail, setMovieDetail }} >
             {props.children}
