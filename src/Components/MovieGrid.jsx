@@ -36,7 +36,7 @@ const MovieGrid = () => {
         <div>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-7 gap-2 justify-items-center">
                 {
-                    movies.map((item) => {
+                    movies?.map((item) => {
                         return (
                             <Link to={`/move-detail/${item.link.replace('https://sdmoviespoint.voto/', '').replaceAll('/', '')}`} key={item.link} className="flex flex-col justify-center items-center  bg-gray-200 rounded-lg shadow-md">
                                 <img src={`${item.image}`} alt="Movie Poster" className="w-35 h-50 sm:w-fit sm:h-fit  object-cover rounded-lg " />
