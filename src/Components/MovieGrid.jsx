@@ -8,7 +8,7 @@ const MovieGrid = () => {
     const GeMovie = async () => {
 
         const corsProxy = 'https://api.allorigins.win/get?url=';
-        const originalUrl = 'https://sdmoviespoint.voto/page/2/';
+        const originalUrl = 'https://sdmoviespoint.diy/page/8';
         const url = corsProxy + encodeURIComponent(originalUrl);
         const response = await fetch(url);
 
@@ -26,6 +26,8 @@ const MovieGrid = () => {
             Movies.push(movie);
         })
         setMovies(Movies);
+
+        console.log(doc);
     }
 
     useEffect(() => {
@@ -42,9 +44,11 @@ const MovieGrid = () => {
                                 <img src={`${item.image}`} alt="Movie Poster" className="w-35 h-50 sm:w-fit sm:h-fit  object-cover rounded-lg " />
                                 <h2 className="text-lg font-bold">{item.title}</h2>
                             </Link>
-                        )
+                        ) 
                     })
                 }
+                {/* {movies?.length === 0 &&
+                    } */}
             </div>
         </div>
     )

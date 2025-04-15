@@ -6,6 +6,7 @@ import Navbar from './Components/Navbar'
 import TopMenu from './Components/TopMenu'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { MovieContex } from './Utils/Context'
+import FilmyZila from './Components/FilmyZila'
 
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
           <AdsBanner />
           <Routes >
             <Route path="/" element={<MovieGrid />} />
+            <Route path="page/:id" element={<MovieGrid />} />
+            <Route path="allmovie" element={<FilmyZila />} />
           </Routes>
           <Routes >
             <Route path="move-detail/:str" element={<MovieDetail />} />

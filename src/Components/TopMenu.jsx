@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 
 const TopMenu = () => {
     const [movies, setMovies] = useState([])
+    const movieArray = [];
+
     const carouselRef = useRef(null);
 
     const scroll = (direction) => {
@@ -35,7 +39,8 @@ const TopMenu = () => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(proxyData.contents, 'text/html');
         const movieElements = doc.querySelector('.owl-carousel')?.querySelectorAll('a');
-        const movieArray = [];
+
+
         movieElements?.forEach((el) => {
             movieArray?.push({
                 link: el?.href,
@@ -43,6 +48,8 @@ const TopMenu = () => {
             })
         })
         setMovies(movieArray);
+
+        console.log()
     }
 
     useEffect(() => {
@@ -56,18 +63,19 @@ const TopMenu = () => {
                     onClick={() => scroll("left")}
                     className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 p-2 rounded-full shadow"
                 >
-                    left
+                    <FaArrowLeft />
                 </button>
 
                 <div ref={carouselRef} className="flex no-scrollbar scroll-smooth space-x-4 ">
                     {[...movies, ...movies]?.map((movie, index) => (
-                        <a href={`/move-detail/xyz`} key={`${movie?.id}-${index}`} className="flex-shrink-0 rounded-xl shadow w-25 h-40 py-2 mx-2">
+                        <Link to={`/move-detail/${movie?.link?.replace('https://sdmoviespoint.voto/', '').replaceAll('/', '')}`} key={`${movie?.id}-${index}`} className="flex-shrink-0 rounded-xl shadow w-25 h-40 py-2 mx-2">
                             <img src={movie?.image} alt={movie?.title} className="rounded-md mb-2 w-fit h-fit border   object-cover mx-auto" />
-                        </a>
+                        </Link>
                     ))}
                 </div>
 
-                <button onClick={() => scroll("right")} className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 p-2 rounded-full shadow"> right
+                <button onClick={() => scroll("right")} className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 p-2 rounded-full shadow">
+                    <FaArrowRight />
                 </button>
             </div>
         </div>

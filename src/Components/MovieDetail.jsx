@@ -16,8 +16,6 @@ const MovieDetail = () => {
             const movieElements = doc?.querySelector('.entry-content');
             const MovieLink = doc?.querySelector('.entry-content tbody tr td form input[name="filename"]');
 
-            console.log(movieElements);
-            
             const movieData = {
                 img: movieElements?.querySelector('p strong img')?.src,
                 title: doc?.querySelector('.entry-title')?.textContent,
@@ -32,7 +30,7 @@ const MovieDetail = () => {
 
     useEffect(() => {
         movieDetail();
-    }, [])
+    }, [str])
 
     return (
         <>
