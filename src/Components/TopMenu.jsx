@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
+import { useContext } from 'react';
+import { UserContext } from '../Utils/Context';
 
 const TopMenu = () => {
     const [movies, setMovies] = useState([])
     const movieArray = [];
+
+    const { movieUrl, corsProxy } = useContext(UserContext);
 
     const carouselRef = useRef(null);
 
@@ -30,9 +34,7 @@ const TopMenu = () => {
     };
 
     const CarousalMovie = async () => {
-        const corsProxy = 'https://api.allorigins.win/get?url=';
-        const originalUrl = 'https://sdmoviespoint.diy/';
-        const url = corsProxy + encodeURIComponent(originalUrl);
+        const url = corsProxy + encodeURIComponent(movieUrl);
         const response = await fetch(url);
         const proxyData = await response.json();
 
@@ -73,6 +75,14 @@ const TopMenu = () => {
                         </Link>
                     ))}
                 </div>
+
+                {
+                    movies?.length === 0 && (
+                        <div className="flex justify-center items-center col-span-3 sm:col-span-4 md:col-span-5 xl:col-span-7 h-40">
+                            <p className="text-gray-500">Loading...</p>
+                        </div>
+                    )
+                }
 
                 <button onClick={() => scroll("right")} className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/70 p-2 rounded-full shadow">
                     <FaArrowRight />
