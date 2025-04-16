@@ -31,7 +31,7 @@ const TopMenu = () => {
 
     const CarousalMovie = async () => {
         const corsProxy = 'https://api.allorigins.win/get?url=';
-        const originalUrl = 'https://sdmoviespoint.voto/';
+        const originalUrl = 'https://sdmoviespoint.diy/';
         const url = corsProxy + encodeURIComponent(originalUrl);
         const response = await fetch(url);
         const proxyData = await response.json();
