@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 
 const MovieGrid = () => {
     const [movies, setMovies] = useState([]);
+    
     const Movies = [];
 
     const GeMovie = async () => {
 
         const corsProxy = 'https://api.allorigins.win/get?url=';
-        const originalUrl = 'https://sdmoviespoint.diy/page/4';
+        const originalUrl = 'https://sdmoviespoint.diy/page/100';
         const url = corsProxy + encodeURIComponent(originalUrl);
         const response = await fetch(url);
 
@@ -17,6 +18,8 @@ const MovieGrid = () => {
         const doc = parser?.parseFromString(proxyData.contents, 'text/html');
         const movieElements = doc?.querySelector('main')?.querySelectorAll('.post-box-media a');
 
+
+        
         movieElements?.forEach((movieElements) => {
             const movie = {
                 image: movieElements.querySelector('img')?.src,
@@ -26,8 +29,7 @@ const MovieGrid = () => {
             Movies.push(movie);
         })
         setMovies(Movies);
-
-        console.log(doc);
+        console.log(Movies);
     }
 
     useEffect(() => {
@@ -35,6 +37,8 @@ const MovieGrid = () => {
     }, [])
 
     return (
+        // <Helmet>
+
         <div>
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 xl:grid-cols-7 gap-2 justify-items-center">
                 {
@@ -56,6 +60,7 @@ const MovieGrid = () => {
                 }
             </div>
         </div>
+        // </Helmet>/
     )
 }
 

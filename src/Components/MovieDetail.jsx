@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom'
 
 const MovieDetail = () => {
-
 
     const [getMovie, setMovie] = useState([])
     const { str } = useParams();
@@ -24,6 +24,8 @@ const MovieDetail = () => {
                 downloadlink: MovieLink?.value,
             }
             setMovie(movieData)
+            console.log(movieElements);
+
 
         } catch (error) {
             console.error('Error fetching movie details:', error);
@@ -36,6 +38,41 @@ const MovieDetail = () => {
 
     return (
         <>
+            <Helmet>
+                <title>{getMovie?.title ? getMovie?.title : "Loading..."}</title>
+                <meta name="description" content="Movie details page" />
+                <meta name={getMovie?.title} content="movie, details, download" />
+                <link rel="canonical" href={`https://yourwebsite.com/move-detail/${str}`} />
+                <meta property="og:title" content={getMovie?.title ? getMovie?.title : "Loading..."} />
+                <meta property="og:description" content="Movie details page" />
+                <meta property="og:image" content={getMovie?.img} />
+                <meta property="og:url" content={`https://yourwebsite.com/move-detail/${str}`} />
+                <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="SDMovie" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={getMovie?.title ? getMovie?.title : "Loading..."} />
+                <meta name="twitter:description" content="Movie details page" />
+                <meta name="twitter:image" content={getMovie?.img} />
+                <meta name="twitter:url" content={`https://yourwebsite.com/move-detail/${str}`} />
+                <meta name="twitter:site" content="@yourtwitterhandle" />
+                <meta name="twitter:creator" content="@yourtwitterhandle" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta name="theme-color" content="#000000" />
+                <link rel="apple-touch-icon" href="/logo192.png" />
+                <link rel="manifest" href="/manifest.json" />
+                <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+                <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+                <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                <meta name="apple-mobile-web-app-title" content="SDMovie" />
+                <meta name="mobile-web-app-capable" content="yes" />
+                <meta name="application-name" content="SDMovie" />
+                <meta name="msapplication-TileColor" content="#000000" />
+                <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+                <meta name="msapplication-config" content="/browserconfig.xml" />
+                <meta name="msapplication-starturl" content="/" />
+            </Helmet>
+
             <div className="flex md:text-2xl flex-col justify-center items-center mt-5">
                 <h2 className={`text-md font-semibold mt-2 text-center px-3 ${getMovie?.title ? "" : "h-6 w-full md:w-[50%] bg-gray-400 rounded-xl animate-pulse"} `}>{getMovie?.title}</h2>
                 <h1 className="text-xl font-bold pt-2 underline">Movie Detail</h1>
