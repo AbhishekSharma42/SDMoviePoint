@@ -9,7 +9,7 @@ const MovieGrid = () => {
     const GeMovie = async () => {
 
         const corsProxy = 'https://api.allorigins.win/get?url=';
-        const originalUrl = 'https://sdmoviespoint.diy/page/100';
+        const originalUrl = 'https://sdmoviespoint.media/page/100';
         const url = corsProxy + encodeURIComponent(originalUrl);
         const response = await fetch(url);
 
