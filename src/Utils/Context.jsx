@@ -5,7 +5,7 @@ const UserContext = createContext();
 const MovieContex = (props) => {
     const [movesDetail, setMovieDetail] = useState([]);
     const [getSearchMovie, setSearchMovie] = useState("");
-    const [movieUrl] = useState("https://sdmoviespoint.diy");
+    const [movieUrl] = useState("https://sdmoviespoint.media");
     const [corsProxy] = useState("https://api.allorigins.win/get?url=");
 
 
