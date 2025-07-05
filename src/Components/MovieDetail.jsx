@@ -10,7 +10,7 @@ const MovieDetail = () => {
     const movieDetail = async () => {
         try {
             const corsProxy = 'https://api.allorigins.win/get?url=';
-            const url = corsProxy + encodeURIComponent(`https://sdmoviespoint.media/${str}`);
+            const url = corsProxy + encodeURIComponent(`https://sdmoviespoint.name/${str}`);
             const response = await fetch(url);
             const proxyData = await response?.json();
             const parser = new DOMParser();
