@@ -12,7 +12,7 @@ const Navbar = () => {
         try {
             setSearchMovie(getSearch);
             const corsProxy = 'https://api.allorigins.win/get?url=';
-            const originalUrl = `https://sdmoviespoint.media/?s=${getSearch}`;
+            const originalUrl = `https://sdmoviespoint.name/?s=${getSearch}`;
             const url = corsProxy + encodeURIComponent(originalUrl);
             const response = await fetch(url);
             const proxyData = await response?.json();
