@@ -70,7 +70,7 @@ const TopMenu = () => {
 
                 <div ref={carouselRef} className="flex no-scrollbar scroll-smooth space-x-4 ">
                     {[...movies, ...movies]?.map((movie, index) => (
-                        <Link to={`/move-detail/${movie?.link?.replace('https://sdmoviespoint.diy/', '').replaceAll('/', '')}`} key={`${movie?.id}-${index}`} className="flex-shrink-0 rounded-xl shadow w-25 h-40 py-2 mx-2">
+                        <Link to={`/move-detail/${movie?.link?.replace('https://sdmoviespoint.name/', '').replaceAll('/', '')}`} key={`${movie?.id}-${index}`} className="flex-shrink-0 rounded-xl shadow w-25 h-40 py-2 mx-2">
                             <img src={movie?.image} alt={movie?.title} className="rounded-md mb-2 w-fit h-fit border   object-cover mx-auto" />
                         </Link>
                     ))}
